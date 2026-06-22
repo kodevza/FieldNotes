@@ -9,16 +9,19 @@ warning: "Always verify current Microsoft documentation before treating these no
 ## Where owner evidence can sit in Entra
 
 **Service principal owners**
+
 Good first signal, but weak operationally. SP owners are users or service principals, not durable ownership groups. A named user can leave, move teams, or lose context.
 ![Service Principal Owner](sp_owner.png)
 
 
 **Cloud Application Administrator**
+
 Useful admin context. This role can manage app registrations and enterprise apps, but it usually points to operators, not accountable workload owners.
 
 ![Cloud Application Administrator](2026-06-22_16-46.png)
 
 **Service principal tags**
+
 Useful hidden metadata. SP tags are not exposed well in Azure Portal, but are easy to pull from Microsoft Graph PowerShell.
 
 ```powershell
@@ -27,6 +30,7 @@ Get-MgServicePrincipal -ServicePrincipalId $spId -Property "id,displayName,tags"
 ```
 
 **Custom security attributes**
+
 Stronger metadata than tags. Visibility and assignment can be controlled, but setup needs the right attribute roles and Graph permissions.
 
 Required:
