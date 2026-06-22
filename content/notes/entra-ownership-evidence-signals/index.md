@@ -1,58 +1,39 @@
 ---
-title: "Field Note: Entra Ownership Evidence Signals"
+title: "Field Note: Service Principal Ownership Evidence Signals"
 date: 2026-06-22
 slug: "entra-ownership-evidence-signals"
 description: "A practical note about evidence signals used to infer accountable owners for Entra service principals and managed identities."
 warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
 ---
 
-This note is about ownership evidence, not automatic ownership assignment.
+## Where owner evidence can sit in Entra
 
-The weak point in many Entra and Azure reviews is not detection. Detection is usually already available. The weak point is accountability before remediation.
+**Service principal owners**
+Good first signal, but weak operationally. SP owners are users or service principals, not durable ownership groups. A named user can leave, move teams, or lose context.
+![Service Principal Owner](sp_owner.png)
 
-## Evidence signals
 
-Useful signals include:
+**Cloud Application Administrator**
+Useful admin context. This role can manage app registrations and enterprise apps, but it usually points to operators, not accountable workload owners.
 
-- explicit app owners
-- Azure resource tags
-- resource group and subscription context
-- RBAC assignments around related resources
-- managed identity linkage
-- deployment and activity history
-- naming conventions
-- group ownership
+![Cloud Application Administrator](2026-06-22_16-46.png)
 
-## Confidence model
+**Service principal tags**
+Useful hidden metadata. SP tags are not exposed well in Azure Portal, but are easy to pull from Microsoft Graph PowerShell.
 
-A simple starting point:
-
-| Signal | Confidence |
-|---|---:|
-| explicit ownership tag | high |
-| application owner | medium |
-| RBAC context | low |
-| naming pattern only | low |
-
-## Screenshot convention
-
-Put screenshots in the same folder as this file:
-
-```text
-content/notes/entra-ownership-evidence-signals/
-  index.md
-  001-azure-resource-tags.png
-  002-entra-app-owners.png
+```powershell
+Get-MgServicePrincipal -ServicePrincipalId $spId -Property "id,displayName,tags" |
+  Select DisplayName, Id, @{n="Tags";e={$_.Tags -join ", "}}
 ```
 
-Then reference them normally:
+**Custom security attributes**
+Stronger metadata than tags. Visibility and assignment can be controlled, but setup needs the right attribute roles and Graph permissions.
 
-```md
-![Azure resource tags](001-azure-resource-tags.png)
+```powershell
+ Get-MgServicePrincipal `                                                  
+>>   -ConsistencyLevel eventual `
+>>   -CountVariable CountVar `   
+>>   -Property "id,displayName,appId,servicePrincipalType,customSecurityAttributes" `
+>>   -Filter "customSecurityAttributes/Ownership/test ne null" |
+>> Select-Object Id, DisplayName, AppId, ServicePrincipalType, CustomSecurityAttributes
 ```
-
-![Example placeholder](001-placeholder.svg)
-
-## Practical conclusion
-
-Do not sell this as a generic scanner. The useful claim is narrower: evidence trail before remediation.
