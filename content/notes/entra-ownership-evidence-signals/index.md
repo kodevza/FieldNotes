@@ -13,6 +13,10 @@ warning: "Always verify current Microsoft documentation before treating these no
 Good first signal, but weak operationally. SP owners are users or service principals, not durable ownership groups. A named user can leave, move teams, or lose context.
 ![Service Principal Owner](sp_owner.png)
 
+**Service principal: Notes**
+
+Lightweight free-text signal. The `Notes` field can carry human context such as the owning department, platform team, business unit, or purpose of the application. Treat it as unstructured evidence, not an authoritative ownership model. It can drift, be stale, or contain naming conventions that only make sense locally.
+
 
 **Cloud Application Administrator**
 
