@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="note">
+  <header class="note-header">
+    <p class="eyebrow">Field Note</p>
+    <h1>{{ .Title }}</h1>
+    <p class="meta">{{ .Date.Format "2006-01-02" }}{{ with .Params.updated }} · updated {{ . }}{{ end }}</p>
+    {{ with .Params.warning }}<p class="warning">{{ . }}</p>{{ end }}
+  </header>
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

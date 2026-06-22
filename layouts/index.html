@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="hero">
+  <p class="eyebrow">Azure / Entra / Ownership Evidence</p>
+  <h1>Field notes from real identity and cloud governance work.</h1>
+  <p class="lead">Short technical notes focused on evidence, accountability, and safe remediation.</p>
+  <a class="button" href="/notes/">Read notes</a>
+</section>
+
+<section class="latest">
+  <h2>Latest notes</h2>
+  <div class="cards">
+  {{ range first 6 (where .Site.RegularPages "Section" "notes") }}
+    <article class="card">
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p>{{ .Summary }}</p>
+      <small>{{ .Date.Format "2006-01-02" }}</small>
+    </article>
+  {{ end }}
+  </div>
+</section>
+{{ end }}
