@@ -8,6 +8,8 @@ warning: "Always verify current Microsoft documentation before treating these no
 
 ## Where owner evidence can sit in Entra
 
+![Service Principal ownership singnals in Entra](image.png)
+
 **Service principal owners**
 
 Good first signal, but weak operationally. SP owners are users or service principals, not durable ownership groups. A named user can leave, move teams, or lose context.
