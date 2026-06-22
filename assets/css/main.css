@@ -16,7 +16,7 @@ body {
 }
 a { color: inherit; }
 .site-header, .site-footer {
-  max-width: 1040px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 24px;
   display: flex;

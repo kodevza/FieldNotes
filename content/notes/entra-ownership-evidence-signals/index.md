@@ -38,10 +38,10 @@ Entra role: Attribute Assignment Reader
 Graph scope: CustomSecAttributeAssignment.Read.All
 
 ```powershell
- Get-MgServicePrincipal `                                                  
->>   -ConsistencyLevel eventual `
->>   -CountVariable CountVar `   
->>   -Property "id,displayName,appId,servicePrincipalType,customSecurityAttributes" `
->>   -Filter "customSecurityAttributes/Ownership/test ne null" |
->> Select-Object Id, DisplayName, AppId, ServicePrincipalType, CustomSecurityAttributes
+Get-MgServicePrincipal `                                                  
+  -ConsistencyLevel eventual `
+  -CountVariable CountVar `   
+  -Property "id,displayName,appId,servicePrincipalType,customSecurityAttributes" `
+  -Filter "customSecurityAttributes/Ownership/test ne null" |
+Select-Object Id, DisplayName, AppId, ServicePrincipalType, CustomSecurityAttributes
 ```
