@@ -29,6 +29,10 @@ Get-MgServicePrincipal -ServicePrincipalId $spId -Property "id,displayName,tags"
 **Custom security attributes**
 Stronger metadata than tags. Visibility and assignment can be controlled, but setup needs the right attribute roles and Graph permissions.
 
+Required:
+Entra role: Attribute Assignment Reader
+Graph scope: CustomSecAttributeAssignment.Read.All
+
 ```powershell
  Get-MgServicePrincipal `                                                  
 >>   -ConsistencyLevel eventual `
