@@ -4,7 +4,7 @@
 {{- $sizeFromMd := .Get "size" | default "750x" -}}
 {{- $size := $sizeFromMd -}}
 
-{{- if eq .Page.Section "list" -}}
+{{- if or (eq .Page.Section "notes") (eq (.Get "context") "notes-list") -}}
   {{- $size = "200x" -}}
 {{- end -}}
 
