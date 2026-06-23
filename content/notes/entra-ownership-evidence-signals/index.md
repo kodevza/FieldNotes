@@ -9,7 +9,7 @@ warning: "Always verify current Microsoft documentation before treating these no
 
 ## Where owner evidence can sit in Entra ID
 
-{{< img src="image.png" size="900x" alt="Service principal ownership signals in Entra ID" >}}
+{{< img src="image.png" size="750x" alt="Service principal ownership signals in Entra ID" >}}
 
 **Service principal owners**
 

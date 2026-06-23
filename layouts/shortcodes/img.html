@@ -1,14 +1,22 @@
-{{ $src := .Get "src" }}
-{{ $size := .Get "size" | default "800x" }}
-{{ $alt := .Get "alt" | default "" }}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
 
-{{ with .Page.Resources.GetMatch $src }}
-  {{ $img := .Resize $size }}
+{{- $sizeFromMd := .Get "size" | default "750x" -}}
+{{- $size := $sizeFromMd -}}
+
+{{- if eq .Page.Section "list" -}}
+  {{- $size = "200x" -}}
+{{- end -}}
+
+{{- with .Page.Resources.GetMatch $src -}}
+  {{- $img := .Resize (printf "%s webp q85" $size) -}}
   <img
     src="{{ $img.RelPermalink }}"
     width="{{ $img.Width }}"
     height="{{ $img.Height }}"
-    alt="{{ $alt }}">
-{{ else }}
-  {{ errorf "Image not found: %s" $src }}
-{{ end }}
+    alt="{{ $alt }}"
+    loading="lazy"
+    decoding="async">
+{{- else -}}
+  {{- errorf "Image not found: %s" $src -}}
+{{- end -}}
