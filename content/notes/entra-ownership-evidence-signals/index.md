@@ -9,7 +9,7 @@ warning: "Always verify current Microsoft documentation before treating these no
 
 ## Where owner evidence can sit in Entra ID
 
-![Service principal ownership signals in Entra ID](image.png)
+{{< img src="image.png" size="900x" alt="Service principal ownership signals in Entra ID" >}}
 
 **Service principal owners**
 
@@ -25,11 +25,6 @@ Can carry useful hints such as project name, business application name, workload
 
 Lightweight free-text signal. The `notes` field can carry human context such as owning department, platform team, business unit, support contact, or application purpose. Treat it as unstructured evidence, not an authoritative ownership model.
 
-**Cloud Application Administrator**
-
-Useful administrative context, but not ownership evidence by itself. This role can manage app registrations and enterprise applications, so it usually points to operators or platform administrators, not accountable workload owners.
-
-![Cloud Application Administrator](2026-06-22_16-46.png)
 
 **Service principal tags**
 
@@ -57,3 +52,15 @@ Get-MgServicePrincipal `
   -Filter "customSecurityAttributes/Ownership/cost_center ne null" |
 Select-Object Id, DisplayName, AppId, ServicePrincipalType, CustomSecurityAttributes
 ```
+
+
+**Cloud Application Administrator**
+
+Useful administrative context, but not ownership evidence by itself. This role can manage app registrations and enterprise applications, so it usually points to operators or platform administrators, not accountable workload owners.
+
+![Cloud Application Administrator](2026-06-22_16-46.png)
+
+
+**Service principal creation or modification**
+
+Creation/modification points to an operator or administrator, not necessarily the accountable owner.

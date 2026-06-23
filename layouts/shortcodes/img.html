@@ -1,0 +1,14 @@
+{{ $src := .Get "src" }}
+{{ $size := .Get "size" | default "800x" }}
+{{ $alt := .Get "alt" | default "" }}
+
+{{ with .Page.Resources.GetMatch $src }}
+  {{ $img := .Resize $size }}
+  <img
+    src="{{ $img.RelPermalink }}"
+    width="{{ $img.Width }}"
+    height="{{ $img.Height }}"
+    alt="{{ $alt }}">
+{{ else }}
+  {{ errorf "Image not found: %s" $src }}
+{{ end }}
