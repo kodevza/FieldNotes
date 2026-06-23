@@ -7,6 +7,8 @@
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
   {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+  {{ $codeCopy := resources.Get "js/code-copy.js" | minify | fingerprint }}
+  <script src="{{ $codeCopy.RelPermalink }}" defer></script>
 </head>
 <body>
   <header class="site-header">

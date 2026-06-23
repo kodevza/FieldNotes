@@ -1,0 +1,15 @@
+{{- $language := .Type | default "text" | lower -}}
+{{- $copyLanguages := slice "pwsh" "powershell" "sh" "bash" "zsh" "python" "py" -}}
+{{- $labels := dict "pwsh" "PowerShell" "powershell" "PowerShell" "sh" "Shell" "bash" "Shell" "zsh" "Shell" "python" "Python" "py" "Python" -}}
+{{- $highlighted := transform.HighlightCodeBlock . -}}
+{{- if in $copyLanguages $language -}}
+<div class="code-copy" data-code-copy>
+  <div class="code-copy__bar">
+    <span class="code-copy__language">{{ index $labels $language }}</span>
+    <button class="code-copy__button" type="button" data-copy-button>Copy</button>
+  </div>
+  {{ $highlighted.Wrapped }}
+</div>
+{{- else -}}
+{{ $highlighted.Wrapped }}
+{{- end -}}
